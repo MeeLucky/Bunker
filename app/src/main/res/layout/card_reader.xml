@@ -1,0 +1,121 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    tools:context=".CardReaderActivity">
+
+    <ScrollView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:orientation="vertical">
+
+            <TextView
+                style="@style/card_text_title"
+                android:text="@string/gender_age" />
+
+            <TextView
+                android:id="@+id/card_gender_age"
+                style="@style/card_text_value"
+                android:text="gender_age" />
+
+            <TextView
+                style="@style/card_text_title"
+                android:text="@string/childfree" />
+
+            <TextView
+                android:id="@+id/card_childfree"
+                style="@style/card_text_value"
+                android:text="childfree" />
+
+            <TextView
+                style="@style/card_text_title"
+                android:text="@string/profession" />
+
+            <TextView
+                android:id="@+id/card_profession"
+                style="@style/card_text_value"
+                android:text="profession" />
+
+            <TextView
+                style="@style/card_text_title"
+                android:text="@string/health" />
+
+            <TextView
+                android:id="@+id/card_health"
+                style="@style/card_text_value"
+                android:text="health" />
+
+            <TextView
+                style="@style/card_text_title"
+                android:text="@string/phobia" />
+
+            <TextView
+                android:id="@+id/card_phobia"
+                style="@style/card_text_value"
+                android:text="phobia" />
+
+            <TextView
+                style="@style/card_text_title"
+                android:text="@string/character" />
+
+            <TextView
+                android:id="@+id/card_character"
+                style="@style/card_text_value"
+                android:text="character" />
+
+            <TextView
+                style="@style/card_text_title"
+                android:text="@string/hobby" />
+
+            <TextView
+                android:id="@+id/card_hobby"
+                style="@style/card_text_value"
+                android:text="hobby" />
+
+            <TextView
+                style="@style/card_text_title"
+                android:text="@string/info" />
+
+            <TextView
+                android:id="@+id/card_info"
+                style="@style/card_text_value"
+                android:text="info" />
+
+            <TextView
+                style="@style/card_text_title"
+                android:text="@string/baggage" />
+
+            <TextView
+                android:id="@+id/card_baggage"
+                style="@style/card_text_value"
+                android:text="baggage" />
+
+            <TextView
+                style="@style/card_text_title"
+                android:text="@string/skill" />
+
+            <TextView
+                android:id="@+id/card_skill1"
+                style="@style/card_text_value"
+                android:text="@string/skill" />
+
+            <TextView
+                style="@style/card_text_title"
+                android:text="@string/skill" />
+
+            <TextView
+                android:id="@+id/card_skill2"
+                style="@style/card_text_value"
+                android:text="@string/skill" />
+        </LinearLayout>
+    </ScrollView>
+
+
+</LinearLayout>

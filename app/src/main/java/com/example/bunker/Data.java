@@ -32,7 +32,7 @@ public class Data {
                 arr = healthiest;
                 history = healthiestHistory;
                 break;
-            case "":
+            case "baggage":
                 arr = baggage;
                 history = baggageHistory;
                 break;
@@ -59,6 +59,10 @@ public class Data {
             int n = rand.nextInt(arr.length);
             if(history.indexOf(n) == -1) {
                 history.add(n);
+
+                if(what.equals("health")) {
+                    return arr[n] +" "+ (rand.nextInt(10) * 10) +"%";
+                }
                 return arr[n];
             }
         }

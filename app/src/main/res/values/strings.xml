@@ -1,3 +1,13 @@
 <resources>
     <string name="app_name">Bunker</string>
+    <string name="gender_age">пол и возраст</string>
+    <string name="profession">профессия</string>
+    <string name="health">здоровье</string>
+    <string name="phobia">фобия</string>
+    <string name="hobby">хобби</string>
+    <string name="character">черта характера</string>
+    <string name="baggage">багаж</string>
+    <string name="info">доп. информация</string>
+    <string name="childfree">чаилдфри</string>
+    <string name="skill">карта действия</string>
 </resources>
