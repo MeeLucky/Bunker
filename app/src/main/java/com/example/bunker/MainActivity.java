@@ -8,6 +8,7 @@ import android.widget.AdapterView;
 import android.content.Intent;
 import android.widget.EditText;
 import android.widget.ListView;
+import android.widget.TextView;
 import android.widget.Toast;
 
 public class MainActivity extends AppCompatActivity {
@@ -24,6 +25,10 @@ public class MainActivity extends AppCompatActivity {
         EditText etPlayerCount = findViewById(R.id.et_player_count);
         int playerCount = Integer.parseInt(etPlayerCount.getText().toString());
         bunker = new Bunker(playerCount);
+
+        TextView disaster = findViewById(R.id.disaster);
+        disaster.setText(Data.getDisaster());
+
         CardAdapter cardAdapter = new CardAdapter(this, R.layout.card_list_view, bunker.getCards());
         final ListView cardList = findViewById(R.id.cards_list);
         cardList.setAdapter(cardAdapter);
@@ -55,5 +60,6 @@ public class MainActivity extends AppCompatActivity {
         });
     }
 }
-//Todo: создать вторую активку для открытия карточек
 //Todo: чёрно-жёлтый стиль. Фон может быть чёрный с серой решёткой в центре.
+//Todo: генерация катастроф
+//Todo: генерация бункера

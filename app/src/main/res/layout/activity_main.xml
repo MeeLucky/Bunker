@@ -27,7 +27,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:inputType="numberSigned"
-            android:text="2"/>
+            android:text="6"/>
     </LinearLayout>
 
     <Button
@@ -42,9 +42,20 @@
         android:onClick="createCards"
         />
 
+    <TextView
+        android:id="@+id/disaster"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:textSize="20sp"
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintRight_toRightOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/create_cards"
+        android:layout_marginTop="20dp"
+        />
+
     <ListView
         android:id="@+id/cards_list"
-        app:layout_constraintTop_toBottomOf="@id/create_cards"
+        app:layout_constraintTop_toBottomOf="@id/disaster"
         app:layout_constraintLeft_toLeftOf="parent"
         app:layout_constraintRight_toRightOf="parent"
         android:layout_width="match_parent"

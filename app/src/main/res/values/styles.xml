@@ -20,5 +20,6 @@
     <style name="card_text_value" parent="card_text_title">
         <item name="android:textSize">20sp</item>
         <item name="android:textColor">#777777</item>
+        <item name="android:layout_marginBottom">5dp</item>
     </style>
 </resources>
