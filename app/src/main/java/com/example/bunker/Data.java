@@ -1,21 +1,82 @@
 package com.example.bunker;
 
-import java.lang.reflect.Array;
 import java.util.ArrayList;
-import java.util.Collections;
-import java.util.List;
 import java.util.Random;
 
 public class Data {
     //представляет данные для создания карт
     static Random rand = new Random();
-
     public static String getDisaster() {
         String[] disasters = new String[] {
-                "Ядераная зима",
-                "Наводнение"
+                "Из-за глобального потепления растают все полярные и континентальные льды, суши стало в 2 раза меньше, вода поглотит всё вокруг, после выхода из бункера произошло нарушение климата тропики теперь повсюду, необходимо приспособиться к новым видам растений и крупным насекомым, остаток населения земли - люди в бункерах",
+                "Из-за глобального похолодания ледники захватили 30% суши у берегов, а вечная метель замела города до неузноваймости, долгая низка температура загубила большенство растительности, остаток населения земли - возможно люди в бункерах",
+                "Из-за ядерного взрыва началась груглогодичная ядерная зима, остаток населения земли - вы последние",
         };
         return disasters[rand.nextInt(disasters.length)];
+    }
+
+    public static String getBunker() {
+        String room = "", item = "";//дебаф
+//Todo: комнаты бункера
+        int roomsCount = (rand.nextInt(5) - 2);
+        if(roomsCount > 0) {
+            String[] rooms = new String[] {
+                    "мед. кабинет",
+                    "склад с оружием",
+                    "мастерская",
+                    "лаболатория",
+                    "гараж с машиной",
+                    "библиотека",
+                    "кухня",
+                    "отдельные спальни для каждого человека",
+                    "склад для продуктов"
+            };
+            ArrayList<Integer> roomsHistory = new ArrayList<>();
+            for(int i = 0; i < roomsCount; i++) {
+                int n = rand.nextInt(rooms.length);
+                if(roomsHistory.indexOf(n) == -1) {
+                    roomsHistory.add(n);
+                    room += rooms[n] + ", ";
+                } else {
+                    i--;
+                }
+            }
+        }
+//Todo: предметы бункер
+        int itemsCount = rand.nextInt(5) - 2;
+        if(itemsCount > 0) {
+            String[] items = new String[]{
+                    "аптечка",
+                    "удочка",
+                    "пистолет",
+                    "карта местности",
+                    "компьютер",
+                    "мини электростанция",
+                    "топор",
+                    "телевизор и 500 фильмов",
+                    "нож",
+                    "лук со стрелами",
+                    "пара раций",
+                    "гаечный ключ",
+                    "набор инструментов"
+            };
+            for (int i = 0; i < itemsCount; i++) {
+                item += items[rand.nextInt(items.length)] + ", ";
+            }
+        }
+        String[] size = new String[] {
+                "50", "50",  "50", "100", "100", "100", "300", "300", "500"
+        };
+        String str = "Основное отделение бункера составляет "+size[rand.nextInt(size.length)]+" квадратных метров"
+                + ((!room.isEmpty() || !item.isEmpty() ? ", в бункере есть " : "")) + room + item;
+        str = str.trim();
+        if(str.charAt(str.length()-1) == ',') {
+            str = str.substring(0, str.length()-1) + ".";
+        } else {
+            str += ".";
+        }
+
+        return str;
     }
 
     private String generalStringGetter(String what) {
@@ -78,8 +139,6 @@ public class Data {
             "рыбак",
             "охотник",
             "механик",
-            "",
-            "",
             "порно актёр",
             "режисёр",
             "президент",
@@ -236,6 +295,10 @@ public class Data {
             "полностью здоров",
             "полностью здоров",
             "полностью здоров",
+            "полностью здоров",
+            "полностью здоров",
+            "полностью здоров",
+            "крепкое телосложение",
             "крепкое телосложение",
             "крепкое телосложение",
             "ожирение",
@@ -261,7 +324,6 @@ public class Data {
             "без ног",
             "без руки",
             "без рук",
-            "ни",
             "да ты прям как \"Ник Вуйчич\" (нету рук и ног)",
             "инвалидность",
             "спид",

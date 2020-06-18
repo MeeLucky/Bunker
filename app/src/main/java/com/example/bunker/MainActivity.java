@@ -7,6 +7,7 @@ import android.view.View;
 import android.widget.AdapterView;
 import android.content.Intent;
 import android.widget.EditText;
+import android.widget.LinearLayout;
 import android.widget.ListView;
 import android.widget.TextView;
 import android.widget.Toast;
@@ -28,6 +29,9 @@ public class MainActivity extends AppCompatActivity {
 
         TextView disaster = findViewById(R.id.disaster);
         disaster.setText(Data.getDisaster());
+
+        TextView bunkerInfo = findViewById(R.id.bunker);
+        bunkerInfo.setText(Data.getBunker());
 
         CardAdapter cardAdapter = new CardAdapter(this, R.layout.card_list_view, bunker.getCards());
         final ListView cardList = findViewById(R.id.cards_list);
@@ -59,7 +63,15 @@ public class MainActivity extends AppCompatActivity {
             }
         });
     }
+
+    public void openCloseDisaster(View view) {
+        TextView tv = findViewById(R.id.disaster);
+        tv.setVisibility(tv.getVisibility() == View.GONE ? View.VISIBLE : View.GONE);
+    }
+
+    public void openCloseBunker(View view) {
+        TextView tv = findViewById(R.id.bunker);
+        tv.setVisibility(tv.getVisibility() == View.GONE ? View.VISIBLE : View.GONE);
+    }
 }
 //Todo: чёрно-жёлтый стиль. Фон может быть чёрный с серой решёткой в центре.
-//Todo: генерация катастроф
-//Todo: генерация бункера
