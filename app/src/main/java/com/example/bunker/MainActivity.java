@@ -6,6 +6,7 @@ import android.os.Bundle;
 import android.view.View;
 import android.widget.AdapterView;
 import android.content.Intent;
+import android.widget.Button;
 import android.widget.EditText;
 import android.widget.LinearLayout;
 import android.widget.ListView;
@@ -64,14 +65,19 @@ public class MainActivity extends AppCompatActivity {
         });
     }
 
-    public void openCloseDisaster(View view) {
-        TextView tv = findViewById(R.id.disaster);
-        tv.setVisibility(tv.getVisibility() == View.GONE ? View.VISIBLE : View.GONE);
-    }
+    public void skipMenu(View view) {
+        LinearLayout ll_pc = findViewById(R.id.ll_player_count);
+        ll_pc.setVisibility(ll_pc.getVisibility() == View.GONE ? View.VISIBLE : View.GONE);
 
-    public void openCloseBunker(View view) {
-        TextView tv = findViewById(R.id.bunker);
-        tv.setVisibility(tv.getVisibility() == View.GONE ? View.VISIBLE : View.GONE);
+        Button create_cards = findViewById(R.id.create_cards);
+        create_cards.setVisibility(create_cards.getVisibility() == View.GONE ? View.VISIBLE : View.GONE);
+
+        TextView disaster = findViewById(R.id.disaster);
+        disaster.setVisibility(disaster.getVisibility() == View.GONE ? View.VISIBLE : View.GONE);
+
+        TextView bunkerBut = findViewById(R.id.bunker);
+        bunkerBut.setVisibility(bunkerBut.getVisibility() == View.GONE ? View.VISIBLE : View.GONE);
+
     }
 }
 //Todo: чёрно-жёлтый стиль. Фон может быть чёрный с серой решёткой в центре.
