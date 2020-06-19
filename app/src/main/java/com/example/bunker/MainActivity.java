@@ -2,9 +2,11 @@ package com.example.bunker;
 
 import androidx.appcompat.app.AppCompatActivity;
 
+import android.content.Context;
 import android.os.Bundle;
 import android.view.View;
 import android.view.WindowManager;
+import android.view.inputmethod.InputMethodManager;
 import android.widget.AdapterView;
 import android.content.Intent;
 import android.widget.Button;
@@ -27,8 +29,14 @@ public class MainActivity extends AppCompatActivity {
     Bunker bunker;
 
     public void createCards(View view) {
+        //hide keyboard
+        InputMethodManager imm = (InputMethodManager) getSystemService(Context.INPUT_METHOD_SERVICE);
+        imm.hideSoftInputFromWindow(getCurrentFocus().getWindowToken(), InputMethodManager.HIDE_NOT_ALWAYS);
+
         EditText etPlayerCount = findViewById(R.id.et_player_count);
-        int playerCount = Integer.parseInt(etPlayerCount.getText().toString());
+        int playerCount = 6;
+        if(!etPlayerCount.getText().toString().isEmpty())
+            playerCount= Integer.parseInt(etPlayerCount.getText().toString());
         bunker = new Bunker(playerCount);
 
         TextView disaster = findViewById(R.id.disaster);
