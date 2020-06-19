@@ -130,6 +130,11 @@ public class Data {
                 if(what.equals("health")) {
                     return arr[n] +" "+ (rand.nextInt(10) * 10) +"%";
                 }
+
+                if(what.equals("info") && arr[n].equals("по 1 образованию ...")) {
+                    return "по 1 образованию " + professions[rand.nextInt(professions.length)];
+                }
+
                 return arr[n];
             }
         }
@@ -443,7 +448,6 @@ public class Data {
     private ArrayList<Integer> hobbiesHistory = new ArrayList<>();
     public String getHobby() { return generalStringGetter("hobby"); }
 
-//Todo: по первому образованию ...
     private String[] info = new String[] {
         "копрофил",
         "был судим за износилование",
@@ -512,7 +516,8 @@ public class Data {
             "сменить профессии всех игроков по часовой",
             "уменьшить бункер на 1",
             "увеличить бункер на 1",
-            "рядом есть ещё один бункер в котором есть ...",
+            "рядом есть ещё один бункер, в котором есть 2 плодовитых мужчин",
+            "рядом есть ещё один бункер, в котором есть 2 плодовитых женщины",
             "вылечить любого игрока от любых недугов",
             "бункер находится около пресного озера",
             "бункер находится в лесу",
