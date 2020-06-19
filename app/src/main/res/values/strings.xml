@@ -10,4 +10,5 @@
     <string name="info">доп. информация</string>
     <string name="childfree">чаилдфри</string>
     <string name="skill">карта действия</string>
+    <string name="back"><![CDATA[<-]]></string>
 </resources>

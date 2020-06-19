@@ -4,6 +4,7 @@ import androidx.appcompat.app.AppCompatActivity;
 
 import android.os.Bundle;
 import android.content.Intent;
+import android.view.View;
 import android.view.WindowManager;
 import android.widget.TextView;
 
@@ -69,5 +70,9 @@ public class CardReaderActivity extends AppCompatActivity {
 
         tv = findViewById(R.id.card_skill2);
         tv.setText(skill2);
+    }
+
+    public void back(View view) {
+        this.finish();
     }
 }
