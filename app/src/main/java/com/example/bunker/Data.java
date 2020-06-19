@@ -289,7 +289,9 @@ public class Data {
             "скептик",
             "культурный",
             "скупой",
-            "подлый"
+            "подлый",
+            "упрямы",
+            "конфликтный"
     };
     private ArrayList<Integer> charactersHistory = new ArrayList<>();
     public String getCharacter() { return generalStringGetter("character"); }
