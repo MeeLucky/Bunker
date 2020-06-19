@@ -21,55 +21,43 @@ public class CardReaderActivity extends AppCompatActivity {
 
         Intent intent = getIntent();
         Bundle extr = intent.getExtras();
-        int age = Objects.requireNonNull(extr).getInt("age");
-        boolean gender = Objects.requireNonNull(extr).getBoolean("gender");
-        boolean childfree = Objects.requireNonNull(extr).getBoolean("childfree");
-        String profession = Objects.requireNonNull(extr).getString("profession");
-        String phobia = Objects.requireNonNull(extr).getString("phobia");
-        String character = Objects.requireNonNull(extr).getString("character");
-        String health = Objects.requireNonNull(extr).getString("health");
-        String baggage = Objects.requireNonNull(extr).getString("baggage");
-        String hobby = Objects.requireNonNull(extr).getString("hobby");
-        String info = Objects.requireNonNull(extr).getString("info");
-        String skill1 = Objects.requireNonNull(extr).getString("skill1");
-        String skill2 = Objects.requireNonNull(extr).getString("skill2");
-
+        Card card = (Card) Objects.requireNonNull(extr).getSerializable(Card.class.getSimpleName());
 
         TextView tv = findViewById(R.id.card_gender_age);
         String gender_age = "";
-        gender_age += gender ? "М. " : "Ж. ";
-        gender_age += age;
+        gender_age += Objects.requireNonNull(card).getGender() ? "М. " : "Ж. ";
+        gender_age += card.getAge();
         tv.setText(gender_age);
 
         tv = findViewById(R.id.card_childfree);
-        tv.setText(childfree ? "да" : "нет");
+        tv.setText(card.getChildfree() ? "да" : "нет");
 
         tv = findViewById(R.id.card_profession);
-        tv.setText(profession);
+        tv.setText(card.getProfession());
 
         tv = findViewById(R.id.card_hobby);
-        tv.setText(hobby);
+        tv.setText(card.getHobby());
 
         tv = findViewById(R.id.card_phobia);
-        tv.setText(phobia);
+        tv.setText(card.getPhobia());
 
         tv = findViewById(R.id.card_baggage);
-        tv.setText(baggage);
+        tv.setText(card.getBaggage());
 
         tv = findViewById(R.id.card_character);
-        tv.setText(character);
+        tv.setText(card.getCharacter());
 
         tv = findViewById(R.id.card_info);
-        tv.setText(info);
+        tv.setText(card.getInfo());
 
         tv = findViewById(R.id.card_health);
-        tv.setText(health);
+        tv.setText(card.getHealth());
 
         tv = findViewById(R.id.card_skill1);
-        tv.setText(skill1);
+        tv.setText(card.getSkill1());
 
         tv = findViewById(R.id.card_skill2);
-        tv.setText(skill2);
+        tv.setText(card.getSkill2());
     }
 
     public void back(View view) {

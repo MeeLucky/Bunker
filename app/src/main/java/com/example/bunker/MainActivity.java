@@ -53,24 +53,9 @@ public class MainActivity extends AppCompatActivity {
             @Override
             public void onItemClick(AdapterView<?> parent, View v, int position, long id)
             {
-
                 Card selectedItem = bunker.getCard(position);
                 Intent intent = new Intent(MainActivity.this, CardReaderActivity.class);
-                intent.putExtra("isAlive", selectedItem.isAlive());
-                intent.putExtra("id", selectedItem.getId());
-                intent.putExtra("gender", selectedItem.getGender());
-                intent.putExtra("age", selectedItem.getAge());
-                intent.putExtra("profession", selectedItem.getProfession());
-                intent.putExtra("health", selectedItem.getHealth());
-                intent.putExtra("character", selectedItem.getCharacter());
-                intent.putExtra("phobia", selectedItem.getPhobia());
-                intent.putExtra("hobby", selectedItem.getHobby());
-                intent.putExtra("info", selectedItem.getInfo());
-                intent.putExtra("baggage", selectedItem.getBaggage());
-                intent.putExtra("childfree", selectedItem.getChildfree());
-                intent.putExtra("skill1", selectedItem.getSkill1());
-                intent.putExtra("skill2", selectedItem.getSkill2());
-
+                intent.putExtra(Card.class.getSimpleName(), selectedItem);
                 startActivity(intent);
             }
         });
@@ -88,7 +73,5 @@ public class MainActivity extends AppCompatActivity {
 
         TextView bunkerBut = findViewById(R.id.bunker);
         bunkerBut.setVisibility(bunkerBut.getVisibility() == View.GONE ? View.VISIBLE : View.GONE);
-
     }
 }
-//Todo: чёрно-жёлтый стиль. Фон может быть чёрный с серой решёткой в центре.

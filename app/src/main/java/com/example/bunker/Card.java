@@ -1,6 +1,8 @@
 package com.example.bunker;
 
-public class Card {
+import java.io.Serializable;
+
+public class Card implements Serializable {
     //карточка с характеристиками
     public static int childfreeAge = 50;
     private int id;
