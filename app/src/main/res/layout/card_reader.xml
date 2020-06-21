@@ -31,67 +31,87 @@
             android:orientation="vertical">
 
             <TextView
+                android:id="@+id/card_gender_title"
                 style="@style/card_text_title"
                 android:text="@string/gender_age" />
 
             <TextView
                 android:id="@+id/card_gender_age"
                 style="@style/card_text_value"
-                android:text="gender_age" />
+                android:text="gender_age"
+                android:tag="0"
+                android:onClick="mark"/>
 
             <TextView
+                android:id="@+id/card_childfree_title"
                 style="@style/card_text_title"
-                android:text="@string/childfree" />
+                android:text="@string/childfree"/>
 
             <TextView
                 android:id="@+id/card_childfree"
                 style="@style/card_text_value"
-                android:text="childfree" />
+                android:text="childfree"
+                android:tag="1"
+                android:onClick="mark" />
 
             <TextView
+                android:id="@+id/card_profession_title"
                 style="@style/card_text_title"
-                android:text="@string/profession" />
+                android:text="@string/profession"/>
 
             <TextView
                 android:id="@+id/card_profession"
                 style="@style/card_text_value"
-                android:text="profession" />
+                android:text="profession"
+                android:tag="2"
+                android:onClick="mark" />
 
             <TextView
+                android:id="@+id/card_health_title"
                 style="@style/card_text_title"
                 android:text="@string/health" />
 
             <TextView
                 android:id="@+id/card_health"
                 style="@style/card_text_value"
-                android:text="health" />
+                android:text="health"
+                android:tag="3"
+                android:onClick="mark" />
 
             <TextView
+                android:id="@+id/card_phobia_title"
                 style="@style/card_text_title"
                 android:text="@string/phobia" />
 
             <TextView
                 android:id="@+id/card_phobia"
                 style="@style/card_text_value"
-                android:text="phobia" />
+                android:text="phobia"
+                android:tag="4"
+                android:onClick="mark" />
 
             <TextView
-                style="@style/card_text_title"
-                android:text="@string/character" />
+                android:id="@+id/card_character_title"
+                android:text="черта характера"
+                style="@style/card_text_title" />
 
             <TextView
                 android:id="@+id/card_character"
                 style="@style/card_text_value"
-                android:text="character" />
+                android:tag="5"
+                android:text="character"
+                android:onClick="mark" />
 
             <TextView
                 style="@style/card_text_title"
-                android:text="@string/hobby" />
+                android:text="@string/hobby"/>
 
             <TextView
                 android:id="@+id/card_hobby"
                 style="@style/card_text_value"
-                android:text="hobby" />
+                android:text="hobby"
+                android:tag="6"
+                android:onClick="mark" />
 
             <TextView
                 style="@style/card_text_title"
@@ -100,16 +120,20 @@
             <TextView
                 android:id="@+id/card_info"
                 style="@style/card_text_value"
-                android:text="info" />
+                android:text="info"
+                android:tag="7"
+                android:onClick="mark" />
 
             <TextView
                 style="@style/card_text_title"
-                android:text="@string/baggage" />
+                android:text="@string/baggage"/>
 
             <TextView
                 android:id="@+id/card_baggage"
                 style="@style/card_text_value"
-                android:text="baggage" />
+                android:text="baggage"
+                android:tag="8"
+                android:onClick="mark" />
 
             <TextView
                 style="@style/card_text_title"

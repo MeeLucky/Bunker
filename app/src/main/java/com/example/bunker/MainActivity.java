@@ -59,7 +59,7 @@ public class MainActivity extends AppCompatActivity {
             public void onItemClick(AdapterView<?> parent, View v, int position, long id)
             {
                 Intent intent = new Intent(MainActivity.this, CardReaderActivity.class);
-                intent.putExtra(Card.class.getSimpleName(), position);
+                intent.putExtra("position", position);
                 startActivity(intent);
             }
         });

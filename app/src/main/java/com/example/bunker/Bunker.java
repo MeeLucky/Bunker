@@ -7,7 +7,6 @@ public class Bunker {
     private Data data = new Data();
     private Random rand = new Random();
     private Card[] cards;
-    public int test = 1;
 
     public Bunker(int playersCount) {
         cards = new Card[playersCount];

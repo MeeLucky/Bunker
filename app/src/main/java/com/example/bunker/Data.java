@@ -293,7 +293,7 @@ public class Data {
             "культурный",
             "скупой",
             "подлый",
-            "упрямы",
+            "упрямый",
             "конфликтный"
     };
     private ArrayList<Integer> charactersHistory = new ArrayList<>();

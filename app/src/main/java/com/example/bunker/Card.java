@@ -4,10 +4,24 @@ import java.io.Serializable;
 
 public class Card implements Serializable {
     //карточка с характеристиками
-    public static int childfreeAge = 50;
-    private int id;
+    public final int childfreeAge = 50;
+    public boolean[] mask = new boolean[11];
+    /*mask open/close of characteristics
+    * 0) gender and age
+    * 1) is childfree
+    * 2) profession
+    * 3) health
+    * 4) phobia
+    * 5) character
+    * 6) hobby
+    * 7) info
+    * 8) baggage
+    * 9) skill1
+    *10) skill2
+    * */
     private boolean isAlive = true;
 
+    private int id;
     private boolean gender; //true - male, false - female
     private int age;
     private String profession;
