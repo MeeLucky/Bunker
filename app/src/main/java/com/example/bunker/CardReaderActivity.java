@@ -2,12 +2,16 @@ package com.example.bunker;
 
 import androidx.appcompat.app.AppCompatActivity;
 
+import android.net.sip.SipSession;
 import android.os.Bundle;
 import android.content.Intent;
 import android.util.Log;
 import android.view.View;
 import android.view.WindowManager;
 import android.widget.TextView;
+import android.widget.Toast;
+
+import com.google.android.material.snackbar.Snackbar;
 
 import java.util.Objects;
 
@@ -96,5 +100,43 @@ public class CardReaderActivity extends AppCompatActivity {
         int pos = Integer.parseInt(tv.getTag().toString());
         tv.setTextColor(getResources().getColor(R.color.gray));
         card.mask[pos] = true;
+    }
+
+    public void skillClick(View view) {
+        final TextView title, desk;
+        final int id;
+        if(view.getTag().toString().equals("1")) {
+            id = 9;
+            title = findViewById(R.id.card_skill1_title);
+            desk = findViewById(R.id.card_skill1);
+        } else {
+            id = 10;
+            title = findViewById(R.id.card_skill2_title);
+            desk = findViewById(R.id.card_skill2);
+        }
+
+
+       Snackbar.make(view, "Использовать карту "+desk.getTag().toString()+"?", Snackbar.LENGTH_LONG)
+               .setActionTextColor(getResources().getColor(R.color.colorPrimary))
+               .setTextColor(getResources().getColor(R.color.white))
+               .setAction("ДА", new View.OnClickListener() {
+                   @Override
+                   public void onClick(View v) {
+                       if(useSkill(desk.getText().toString())) {
+                           title.setTextColor(getResources().getColor(R.color.gray));
+                           desk.setTextColor(getResources().getColor(R.color.gray));
+                           card.mask[id] = true;
+                       }
+                   }
+               })
+               .show();
+    }
+
+    private boolean useSkill(String skillDesk) {
+        switch (skillDesk) {
+            default:
+                Toast.makeText(this, "Устно объявите об использовании карты", Toast.LENGTH_LONG).show();
+                return true;
+        }
     }
 }

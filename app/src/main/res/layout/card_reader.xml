@@ -136,22 +136,28 @@
                 android:onClick="mark" />
 
             <TextView
+                android:id="@+id/card_skill1_title"
                 style="@style/card_text_title"
                 android:text="@string/skill" />
 
             <TextView
                 android:id="@+id/card_skill1"
                 style="@style/card_text_value"
-                android:text="@string/skill" />
+                android:text="@string/skill"
+                android:tag="1"
+                android:onClick="skillClick"/>
 
             <TextView
+                android:id="@+id/card_skill2_title"
                 style="@style/card_text_title"
                 android:text="@string/skill" />
 
             <TextView
                 android:id="@+id/card_skill2"
                 style="@style/card_text_value"
-                android:text="@string/skill" />
+                android:tag="2"
+                android:text="@string/skill"
+                android:onClick="skillClick"/>
         </LinearLayout>
     </ScrollView>
 </androidx.constraintlayout.widget.ConstraintLayout>
