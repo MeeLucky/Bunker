@@ -31,6 +31,9 @@ public class CardReaderActivity extends AppCompatActivity {
         int position = extr.getInt("position");
         card = bunker.getCard(position);
 
+        int gray = getResources().getColor(R.color.white);
+        int red = getResources().getColor(R.color.red);
+
         TextView tv = findViewById(R.id.card_gender_age);
         String gender_age = "";
         gender_age += Objects.requireNonNull(card).getGender() ? "М. " : "Ж. ";

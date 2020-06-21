@@ -14,12 +14,14 @@ public class CardAdapter extends ArrayAdapter {
     private LayoutInflater inflater;
     private int layout;
     private Card[] cards;
+    private Context context;
 
     public CardAdapter(Context context, int resource, Card[] cards) {
         super(context, resource, cards);
         this.cards = cards;
         this.layout = resource;
         this.inflater = LayoutInflater.from(context);
+        this.context = context;
     }
     public View getView(int position, View convertView, ViewGroup parent) {
 
@@ -32,9 +34,17 @@ public class CardAdapter extends ArrayAdapter {
         Card card = cards[position];
 
 
+        int gray = context.getResources().getColor(R.color.white);
+        int red = context.getResources().getColor(R.color.red);
+        
         id.setText(String.valueOf(card.getId()));
+        id.setTextColor(card.isAlive() ? gray : red);
+
         name.setText(card.getProfession());
+        name.setTextColor(card.isAlive() ? gray : red);
+
         isAlive.setText(card.isAlive() ? "alive" : "death");
+        isAlive.setTextColor(card.isAlive() ? gray : red);
 
         return view;
     }

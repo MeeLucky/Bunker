@@ -15,6 +15,7 @@ import android.widget.EditText;
 import android.widget.LinearLayout;
 import android.widget.ListView;
 import android.widget.TextView;
+import android.widget.Toast;
 
 public class MainActivity extends AppCompatActivity {
 
@@ -47,10 +48,10 @@ public class MainActivity extends AppCompatActivity {
         TextView disaster = findViewById(R.id.disaster);
         disaster.setText(Data.getDisaster());
 
-        TextView bunkerInfo = findViewById(R.id.bunker);
+        final TextView bunkerInfo = findViewById(R.id.bunker);
         bunkerInfo.setText(Data.getBunker());
 
-        CardAdapter cardAdapter = new CardAdapter(this, R.layout.card_list_view, bunker.getCards());
+        final CardAdapter cardAdapter = new CardAdapter(this, R.layout.card_list_view, bunker.getCards());
         final ListView cardList = findViewById(R.id.cards_list);
         cardList.setAdapter(cardAdapter);
 
@@ -58,9 +59,28 @@ public class MainActivity extends AppCompatActivity {
             @Override
             public void onItemClick(AdapterView<?> parent, View v, int position, long id)
             {
+                if(!bunker.getCard(position).isAlive()) {
+                    Toast.makeText(MainActivity.this, "выбранный игрок мёртв", Toast.LENGTH_SHORT).show();
+                    return;
+                }
                 Intent intent = new Intent(MainActivity.this, CardReaderActivity.class);
                 intent.putExtra("position", position);
                 startActivity(intent);
+            }
+        });
+
+        cardList.setOnItemLongClickListener(new AdapterView.OnItemLongClickListener() {
+            @Override
+            public boolean onItemLongClick(AdapterView<?> parent, View view, int position, long id) {
+                Card card = bunker.getCard(position);
+
+                String str = "Игрок " + (position + 1) + (card.isAlive() ? " убит" : " воскрешён");
+                Toast.makeText(MainActivity.this, str, Toast.LENGTH_SHORT).show();
+
+                card.setAlive();
+                cardAdapter.notifyDataSetChanged();
+
+                return true;
             }
         });
     }

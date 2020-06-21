@@ -60,6 +60,10 @@ public class Card implements Serializable {
         }
     }
 
+    public void setAlive() {
+        isAlive = !isAlive;
+    }
+
     public boolean isAlive() { return isAlive; }
     public boolean getGender() { return gender; }
     public boolean getChildfree() { return childfree; }
