@@ -4,6 +4,7 @@ import androidx.appcompat.app.AppCompatActivity;
 
 import android.content.Context;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.View;
 import android.view.WindowManager;
 import android.view.inputmethod.InputMethodManager;
@@ -14,7 +15,6 @@ import android.widget.EditText;
 import android.widget.LinearLayout;
 import android.widget.ListView;
 import android.widget.TextView;
-import android.widget.Toast;
 
 public class MainActivity extends AppCompatActivity {
 
@@ -24,20 +24,25 @@ public class MainActivity extends AppCompatActivity {
         this.getWindow().setFlags(WindowManager.LayoutParams.FLAG_FULLSCREEN, WindowManager.LayoutParams.FLAG_FULLSCREEN);
         setContentView(R.layout.activity_main);
         getSupportActionBar().hide();
+
     }
 
     Bunker bunker;
 
     public void createCards(View view) {
         //hide keyboard
-        InputMethodManager imm = (InputMethodManager) getSystemService(Context.INPUT_METHOD_SERVICE);
-        imm.hideSoftInputFromWindow(getCurrentFocus().getWindowToken(), InputMethodManager.HIDE_NOT_ALWAYS);
+        ((InputMethodManager) getSystemService(Context.INPUT_METHOD_SERVICE))
+                .hideSoftInputFromWindow(
+                        getCurrentFocus().getWindowToken(),
+                        InputMethodManager.HIDE_NOT_ALWAYS
+                );
 
         EditText etPlayerCount = findViewById(R.id.et_player_count);
         int playerCount = 6;
         if(!etPlayerCount.getText().toString().isEmpty())
             playerCount= Integer.parseInt(etPlayerCount.getText().toString());
-        bunker = new Bunker(playerCount);
+        Singleton.setBunker(playerCount);
+        bunker = Singleton.getBunker();
 
         TextView disaster = findViewById(R.id.disaster);
         disaster.setText(Data.getDisaster());
@@ -53,9 +58,8 @@ public class MainActivity extends AppCompatActivity {
             @Override
             public void onItemClick(AdapterView<?> parent, View v, int position, long id)
             {
-                Card selectedItem = bunker.getCard(position);
                 Intent intent = new Intent(MainActivity.this, CardReaderActivity.class);
-                intent.putExtra(Card.class.getSimpleName(), selectedItem);
+                intent.putExtra(Card.class.getSimpleName(), position);
                 startActivity(intent);
             }
         });

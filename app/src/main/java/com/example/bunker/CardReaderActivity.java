@@ -4,6 +4,7 @@ import androidx.appcompat.app.AppCompatActivity;
 
 import android.os.Bundle;
 import android.content.Intent;
+import android.util.Log;
 import android.view.View;
 import android.view.WindowManager;
 import android.widget.TextView;
@@ -12,6 +13,7 @@ import java.util.Objects;
 
 public class CardReaderActivity extends AppCompatActivity {
 
+    Bunker bunker = Singleton.getBunker();
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -21,7 +23,8 @@ public class CardReaderActivity extends AppCompatActivity {
 
         Intent intent = getIntent();
         Bundle extr = intent.getExtras();
-        Card card = (Card) Objects.requireNonNull(extr).getSerializable(Card.class.getSimpleName());
+        int position = extr.getInt("position");
+        Card card = bunker.getCard(position);
 
         TextView tv = findViewById(R.id.card_gender_age);
         String gender_age = "";
