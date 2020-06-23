@@ -13,7 +13,7 @@ public class Bunker {
 
         for(int i = 0; i < cards.length; i++) {
             cards[i] = new Card(
-                    i+1,
+                    i,
                     rand.nextBoolean(),
                     18 + rand.nextInt(72),
                     data.getProfession(),

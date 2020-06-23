@@ -37,7 +37,7 @@ public class CardAdapter extends ArrayAdapter {
         int gray = context.getResources().getColor(R.color.white);
         int red = context.getResources().getColor(R.color.red);
         
-        id.setText(String.valueOf(card.getId()));
+        id.setText(String.valueOf(card.getId()+1));
         id.setTextColor(card.isAlive() ? gray : red);
 
         name.setText(card.getProfession());

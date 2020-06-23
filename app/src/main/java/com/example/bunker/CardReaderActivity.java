@@ -1,5 +1,6 @@
 package com.example.bunker;
 
+import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
 
 import android.net.sip.SipSession;
@@ -8,6 +9,7 @@ import android.content.Intent;
 import android.util.Log;
 import android.view.View;
 import android.view.WindowManager;
+import android.widget.Switch;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -32,7 +34,6 @@ public class CardReaderActivity extends AppCompatActivity {
         card = bunker.getCard(position);
 
         int gray = getResources().getColor(R.color.white);
-        int red = getResources().getColor(R.color.red);
 
         TextView tv = findViewById(R.id.card_gender_age);
         String gender_age = "";
@@ -85,13 +86,19 @@ public class CardReaderActivity extends AppCompatActivity {
 
         tv = findViewById(R.id.card_skill1);
         tv.setText(card.getSkill1());
-        if(card.mask[9])
+        if(card.mask[9]) {
             tv.setTextColor(getResources().getColor(R.color.gray));
+            tv.setEnabled(false);
+            ((TextView)findViewById(R.id.card_skill1_title)).setTextColor(gray);
+        }
 
         tv = findViewById(R.id.card_skill2);
         tv.setText(card.getSkill2());
-        if(card.mask[10])
-            tv.setTextColor(getResources().getColor(R.color.gray));
+        if(card.mask[10]) {
+            tv.setTextColor(gray);
+            tv.setEnabled(false);
+            ((TextView)findViewById(R.id.card_skill2_title)).setTextColor(gray);
+        }
     }
 
     public void back(View view) {
@@ -106,17 +113,12 @@ public class CardReaderActivity extends AppCompatActivity {
     }
 
     public void skillClick(View view) {
-        final TextView title, desk;
-        final int id;
-        if(view.getTag().toString().equals("1")) {
-            id = 9;
-            title = findViewById(R.id.card_skill1_title);
+        final TextView desk;
+        final boolean isFirst = view.getTag().toString().equals("1");
+        if(isFirst)
             desk = findViewById(R.id.card_skill1);
-        } else {
-            id = 10;
-            title = findViewById(R.id.card_skill2_title);
+        else
             desk = findViewById(R.id.card_skill2);
-        }
 
 
        Snackbar.make(view, "Использовать карту "+desk.getTag().toString()+"?", Snackbar.LENGTH_LONG)
@@ -125,17 +127,33 @@ public class CardReaderActivity extends AppCompatActivity {
                .setAction("ДА", new View.OnClickListener() {
                    @Override
                    public void onClick(View v) {
-                       if(useSkill(desk.getText().toString())) {
-                           title.setTextColor(getResources().getColor(R.color.gray));
-                           desk.setTextColor(getResources().getColor(R.color.gray));
-                           card.mask[id] = true;
+                       if(useSkill(desk.getText().toString(), isFirst)) {
+                           markSkill(isFirst);
                        }
                    }
                })
                .show();
     }
 
-    private boolean useSkill(String skillDesk) {
+    private void markSkill(boolean isFirst) {
+        final TextView title, desk;
+        final int id;
+        if(isFirst) {
+            id = 9;
+            title = findViewById(R.id.card_skill1_title);
+            desk = findViewById(R.id.card_skill1);
+        } else {
+            id = 10;
+            title = findViewById(R.id.card_skill2_title);
+            desk = findViewById(R.id.card_skill2);
+        }
+        title.setTextColor(getResources().getColor(R.color.gray));
+        desk.setTextColor(getResources().getColor(R.color.gray));
+        desk.setEnabled(false);
+        card.mask[id] = true;
+    }
+
+    private boolean useSkill(String skillDesk, boolean isFirst) {
         switch (skillDesk) {
             case "сменить себе профессию":
                 card.setProfession(bunker.data.getProfession());
@@ -186,6 +204,18 @@ public class CardReaderActivity extends AppCompatActivity {
                 card.setPhobia("нет фобий");
                 break;
 
+            case "обменять богаж с любым игроком":
+                steal("baggage", isFirst);
+                return false;
+
+            case "обменять хобби с любым игроком":
+                steal("hobby", isFirst);
+                return false;
+
+            case "обменять здоровье с любым игроком":
+                steal("health", isFirst);
+                return false;
+
             default:
                 Toast.makeText(this, "Устно объявите об использовании карты", Toast.LENGTH_LONG).show();
                 return true;
@@ -193,5 +223,51 @@ public class CardReaderActivity extends AppCompatActivity {
 
         this.recreate();
         return true;
+    }
+
+    private void steal(String item, boolean isFirst) {
+        Intent intent = new Intent(this, ChosePlayer.class);
+        intent.putExtra("msg", "test");
+        intent.putExtra("id1", card.getId());
+        intent.putExtra("isFirst", isFirst);
+        intent.putExtra("item", item);
+        startActivityForResult(intent, 1);
+    }
+
+    @Override
+    protected void onActivityResult(int requestCode, int resultCode, @Nullable Intent data) {
+        if (requestCode == 1)
+            if (resultCode == RESULT_OK) {
+                markSkill(data.getBooleanExtra("isFirst", true));
+                int id1 = data.getIntExtra("id1", -1);
+                int id2 = data.getIntExtra("id2", -1);
+                Card p1 = bunker.getCard(id1);
+                Card p2 = bunker.getCard(id2);
+                String item = data.getStringExtra("item");
+                String tmp1, tmp2;
+                switch (item) {
+                    case "baggage":
+                        tmp1 = p1.getBaggage();
+                        tmp2 = p2.getBaggage();
+                        p1.setBaggage(tmp2);
+                        p2.setBaggage(tmp1);
+                        break;
+                    case "hobby":
+                        tmp1 = p1.getHobby();
+                        tmp2 = p2.getHobby();
+                        p1.setHobby(tmp2);
+                        p2.setHobby(tmp1);
+                        break;
+                    case "health":
+                        tmp1 = p1.getHealth();
+                        tmp2 = p2.getHealth();
+                        p1.setHealth(tmp2);
+                        p2.setHealth(tmp1);
+                        break;
+                }
+                this.recreate();
+            }
+        else
+            super.onActivityResult(requestCode, resultCode, data);
     }
 }
