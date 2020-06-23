@@ -29,6 +29,7 @@ public class MainActivity extends AppCompatActivity {
     }
 
     Bunker bunker;
+    CardAdapter cardAdapter = null;
 
     public void createCards(View view) {
         //hide keyboard
@@ -51,7 +52,7 @@ public class MainActivity extends AppCompatActivity {
         final TextView bunkerInfo = findViewById(R.id.bunker);
         bunkerInfo.setText(Data.getBunker());
 
-        final CardAdapter cardAdapter = new CardAdapter(this, R.layout.card_list_view, bunker.getCards());
+        cardAdapter = new CardAdapter(this, R.layout.card_list_view, bunker.getCards());
         final ListView cardList = findViewById(R.id.cards_list);
         cardList.setAdapter(cardAdapter);
 
@@ -83,6 +84,14 @@ public class MainActivity extends AppCompatActivity {
                 return true;
             }
         });
+    }
+
+    @Override
+    protected void onResume() {
+        super.onResume();
+
+        if(cardAdapter != null)
+            cardAdapter.notifyDataSetChanged();
     }
 
     public void skipMenu(View view) {

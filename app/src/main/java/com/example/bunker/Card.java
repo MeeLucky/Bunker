@@ -64,6 +64,30 @@ public class Card implements Serializable {
         isAlive = !isAlive;
     }
 
+    public void setProfession(String profession) {
+        this.profession = profession;
+    }
+
+    public void setPhobia(String phobia) {
+        this.phobia = phobia;
+    }
+
+    public void setCharacter(String character) {
+        this.character = character;
+    }
+
+    public void setHealth(String health) {
+        this.health = health;
+    }
+
+    public void setBaggage(String baggage) {
+        this.baggage = baggage;
+    }
+
+    public void setHobby(String hobby) {
+        this.hobby = hobby;
+    }
+
     public boolean isAlive() { return isAlive; }
     public boolean getGender() { return gender; }
     public boolean getChildfree() { return childfree; }

@@ -137,9 +137,61 @@ public class CardReaderActivity extends AppCompatActivity {
 
     private boolean useSkill(String skillDesk) {
         switch (skillDesk) {
+            case "сменить себе профессию":
+                card.setProfession(bunker.data.getProfession());
+                break;
+
+            case "сменить себе фобию":
+                card.setPhobia(bunker.data.getPhobia());
+                break;
+
+            case "сменить себе хобби":
+                card.setHobby(bunker.data.getHobby());
+                break;
+
+            case "сменить себе багаж":
+                card.setBaggage(bunker.data.getBaggage());
+                break;
+
+            case "сменить себе здоровье":
+                card.setHealth(bunker.data.getHealth());
+                break;
+
+            case "сменить проффесии всех игроков":
+                for(Card item : bunker.getCards()) {
+                    item.setProfession(bunker.data.getProfession());
+                }
+                break;
+
+            case "сменить профессии всех игроков по часовой":
+                Card[] cards = bunker.getCards();
+                String prof = "";
+                for(Card item : cards) {
+                    if(item.isAlive()) {
+                        String tmp = item.getProfession();
+                        item.setProfession(prof);
+                        prof = tmp;
+                    }
+                }
+                for(Card item : cards) {
+                    if(item.isAlive()) {
+                        item.setProfession(prof);
+                        break;
+                    }
+                }
+                break;
+
+            case "вылечить себя от любых недугов (фобия и здоровье)":
+                card.setHealth("Полностью здоров");
+                card.setPhobia("нет фобий");
+                break;
+
             default:
                 Toast.makeText(this, "Устно объявите об использовании карты", Toast.LENGTH_LONG).show();
                 return true;
         }
+
+        this.recreate();
+        return true;
     }
 }

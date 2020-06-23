@@ -4,7 +4,7 @@ import java.util.Random;
 
 public class Bunker {
     //генератор карточек
-    private Data data = new Data();
+    public Data data = new Data();
     private Random rand = new Random();
     private Card[] cards;
 
