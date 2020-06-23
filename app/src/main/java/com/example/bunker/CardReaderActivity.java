@@ -205,15 +205,39 @@ public class CardReaderActivity extends AppCompatActivity {
                 break;
 
             case "обменять богаж с любым игроком":
-                steal("baggage", isFirst);
+                chosePlayer("baggage", "steal", isFirst);
                 return false;
 
             case "обменять хобби с любым игроком":
-                steal("hobby", isFirst);
+                chosePlayer("hobby", "steal", isFirst);
                 return false;
 
-            case "обменять здоровье с любым игроком":
-                steal("health", isFirst);
+            case "изменить профессию любого игрока":
+                chosePlayer("profession", "change", isFirst);
+                return false;
+
+            case "изменить фобию любого игрока":
+                chosePlayer("phobia", "change", isFirst);
+                return false;
+
+            case "изменить хобби любого игрока":
+                chosePlayer("hobby", "change", isFirst);
+                return false;
+
+            case "изменить здоровье любого игрока":
+                chosePlayer("health", "change", isFirst);
+                return false;
+
+            case "изменить багаж любого игрока":
+                chosePlayer("baggage", "change", isFirst);
+                return false;
+
+            case "вылечить любого игрока от любых недугов (фобия и здоровье)":
+                chosePlayer("phobia health", "heal", isFirst);
+                return false;
+
+            case "вылечить бесплодие любого игрока":
+                chosePlayer("childfree", "heal", isFirst);
                 return false;
 
             default:
@@ -225,12 +249,12 @@ public class CardReaderActivity extends AppCompatActivity {
         return true;
     }
 
-    private void steal(String item, boolean isFirst) {
+    private void chosePlayer(String item, String action, boolean isFirst) {
         Intent intent = new Intent(this, ChosePlayer.class);
-        intent.putExtra("msg", "test");
         intent.putExtra("id1", card.getId());
-        intent.putExtra("isFirst", isFirst);
+        intent.putExtra("action", action);
         intent.putExtra("item", item);
+        intent.putExtra("isFirst", isFirst);
         startActivityForResult(intent, 1);
     }
 
@@ -238,34 +262,64 @@ public class CardReaderActivity extends AppCompatActivity {
     protected void onActivityResult(int requestCode, int resultCode, @Nullable Intent data) {
         if (requestCode == 1)
             if (resultCode == RESULT_OK) {
-                markSkill(data.getBooleanExtra("isFirst", true));
                 int id1 = data.getIntExtra("id1", -1);
                 int id2 = data.getIntExtra("id2", -1);
                 Card p1 = bunker.getCard(id1);
                 Card p2 = bunker.getCard(id2);
                 String item = data.getStringExtra("item");
-                String tmp1, tmp2;
-                switch (item) {
-                    case "baggage":
-                        tmp1 = p1.getBaggage();
-                        tmp2 = p2.getBaggage();
-                        p1.setBaggage(tmp2);
-                        p2.setBaggage(tmp1);
-                        break;
-                    case "hobby":
-                        tmp1 = p1.getHobby();
-                        tmp2 = p2.getHobby();
-                        p1.setHobby(tmp2);
-                        p2.setHobby(tmp1);
-                        break;
-                    case "health":
-                        tmp1 = p1.getHealth();
-                        tmp2 = p2.getHealth();
-                        p1.setHealth(tmp2);
-                        p2.setHealth(tmp1);
-                        break;
+                String action = data.getStringExtra("action");
+                if(action.equals("steal")) {
+                    String tmp1, tmp2;
+                    switch (item) {
+                        case "baggage":
+                            tmp1 = p1.getBaggage();
+                            tmp2 = p2.getBaggage();
+                            p1.setBaggage(tmp2);
+                            p2.setBaggage(tmp1);
+                            break;
+                        case "hobby":
+                            tmp1 = p1.getHobby();
+                            tmp2 = p2.getHobby();
+                            p1.setHobby(tmp2);
+                            p2.setHobby(tmp1);
+                            break;
+                        case "health":
+                            tmp1 = p1.getHealth();
+                            tmp2 = p2.getHealth();
+                            p1.setHealth(tmp2);
+                            p2.setHealth(tmp1);
+                            break;
+                    }
+                }
+                if(action.equals("change")) {
+                    switch (item) {
+                        case "profession":
+                            p2.setProfession(bunker.data.getProfession());
+                            break;
+                        case "baggage":
+                            p2.setBaggage(bunker.data.getBaggage());
+                            break;
+                        case "health":
+                            p2.setHealth(bunker.data.getHealth());
+                            break;
+                        case "hobby":
+                            p2.setHobby(bunker.data.getHobby());
+                            break;
+                        case "phobia":
+                            p2.setPhobia(bunker.data.getPhobia());
+                            break;
+                    }
+                }
+                if(action.equals("heal")) {
+                    if(item.equals("phobia health")) {
+                        p2.setHealth("полностью здоров");
+                        p2.setPhobia("нет фобий");
+                    }
+                    if(item.equals("childfree"))
+                        p2.setChilefree(false);
                 }
                 this.recreate();
+                markSkill(data.getBooleanExtra("isFirst", true));
             }
         else
             super.onActivityResult(requestCode, resultCode, data);

@@ -27,6 +27,7 @@ public class ChosePlayer extends AppCompatActivity {
 
         Bundle extras = getIntent().getExtras();
         final boolean isFirst = extras.getBoolean("isFirst");
+        final String action = extras.getString("action");
         final String item = extras.getString("item");
         String question = extras.getString("msg");
         id1 = extras.getInt("id1");
@@ -49,6 +50,7 @@ public class ChosePlayer extends AppCompatActivity {
                     intent.putExtra("id2", bunker.getCard(position).getId());
                     intent.putExtra("isFirst", isFirst);
                     intent.putExtra("item", item);
+                    intent.putExtra("action", action);
                     setResult(RESULT_OK, intent);
                     finish();
                 }

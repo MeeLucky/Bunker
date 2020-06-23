@@ -80,6 +80,10 @@ public class Card implements Serializable {
         this.health = health;
     }
 
+    public void setChilefree(boolean isChildfree) {
+        this.childfree = isChildfree;
+    }
+
     public void setBaggage(String baggage) {
         this.baggage = baggage;
     }
@@ -87,7 +91,6 @@ public class Card implements Serializable {
     public void setHobby(String hobby) {
         this.hobby = hobby;
     }
-
     public boolean isAlive() { return isAlive; }
     public boolean getGender() { return gender; }
     public boolean getChildfree() { return childfree; }
@@ -101,5 +104,6 @@ public class Card implements Serializable {
     public String getHobby() { return hobby; }
     public String getInfo() { return info; }
     public String getSkill1() { return skill1; }
+
     public String getSkill2() { return skill2; }
 }
